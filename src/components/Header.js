@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import app from '../firebase/firebaseConfig'
 import { useState } from 'react';
 const auth = getAuth(app);
@@ -24,10 +24,10 @@ const Header = () => {
       .then(result => {
         const user = result.user;
         setUser(user);
-        console.log(user.displayName);
+        // console.log(user);
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
     })
   }
 
@@ -36,10 +36,20 @@ const Header = () => {
       .then(result => {
         const user = result.user;
         setUser(user);
-        console.log(user);
+        // console.log(user);
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
+      })
+  }
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        setUser({});
+      })
+      .catch(() => {
+        setUser({})
       })
   }
 
@@ -62,7 +72,7 @@ const Header = () => {
                   <Link className='btn btn-primary' to="/register">Register</Link>
           
                   {user.uid ?
-                    <button className='btn btn-primary' >Sign Out</button> :
+                    <button className='btn btn-primary' onClick={handleSignOut}>Sign Out</button> :
                     <>
                       <button className='btn btn-primary' onClick={handleGoogleSignIn}>Google Sing In</button>
                       <button className='btn btn-primary' onClick={handleGithubSignIn}>Github Sign IN</button>
