@@ -1,6 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import app from '../firebase/firebaseConfig'
+
+const auth = getAuth(app);
 
 const Login = () => {
 
@@ -9,6 +13,14 @@ const Login = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     console.log(email, password);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+      console.log(error);
+    })
   }
 
     return (

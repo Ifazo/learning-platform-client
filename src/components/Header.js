@@ -57,6 +57,7 @@ const Header = () => {
         <div>
     <Navbar bg="light" expand="lg">
       <Container>
+            
             <Navbar.Brand to="/">Tutorial Wiki</Navbar.Brand>
             <div className='d-flex'>
               <p>User name: {user.displayName}</p>
@@ -69,7 +70,7 @@ const Header = () => {
                 <Link className='btn btn-primary' to="/">Home</Link>
                 <Link className='btn btn-primary' to="/blog">Blog</Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <Link className='btn btn-primary' to="/register">Register</Link>
+                  <Link className='btn btn-primary' to="/login">Register/Sign-in</Link>
           
                   {user.uid ?
                     <button className='btn btn-primary' onClick={handleSignOut}>Sign Out</button> :
