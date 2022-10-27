@@ -5,14 +5,14 @@ import Cards from './Cards';
 const Home = () => {
 
     const data = useLoaderData();
-    console.log(data);
+    // console.log(data);
 
     return (
         <div>
             <h5>Home Page</h5>
             {
-                data.map((item) => <Cards key={data.id} item={item}></Cards>
-                )}
+            data.map((item) => <Cards key={data.id} item={item}></Cards>
+            )}
         </div>
     );
 };

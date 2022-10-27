@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 const Cards = (item) => {
-console.log(item);
+// console.log(item);
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={item.item.logo} />
