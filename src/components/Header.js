@@ -71,8 +71,8 @@ const Header = () => {
                 <Link className='btn btn-primary' to="/courses">Courses</Link>
                 <Link className='btn btn-primary' to="/blog">Blog</Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <Link className='btn btn-primary' to="/login">Sign-in</Link>
                   <Link className='btn btn-primary' to="/register">Register</Link>
+                  <Link className='btn btn-primary' to="/login">Sign-in</Link>
           
                   {user.uid ?
                     <button className='btn btn-primary' onClick={handleSignOut}>Sign Out</button> :

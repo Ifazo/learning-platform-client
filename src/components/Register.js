@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
 import app from '../firebase/firebaseConfig'
 import { Link } from 'react-router-dom';
 
@@ -29,11 +29,20 @@ const Register = () => {
                 const user = result.user;
                 console.log(user);
                 setSuccess(true);
+                setPasswordError('');
                 form.reset();
             })
             .catch(error => {
                 console.error(error);
                 setPasswordError(error.message);
+            })
+        
+        signOut(auth)
+            .then(() => {
+                console.log('Sign-out successful');
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }
 
