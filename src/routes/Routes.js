@@ -11,7 +11,7 @@ import Main from "../outlet/Main";
 
 
 export const routes = createBrowserRouter([
-        {
+    {
         path: "/",
         element: <Main></Main>,
         errorElement: <Errorpage></Errorpage>,
@@ -19,17 +19,17 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/')
+                loader: () => fetch('https://b610-lerning-platform-server-side-ifazo.vercel.app/')
             },
             {
                 path: "/courses",
                 element: <Courses></Courses>,
-                loader: () => fetch('http://localhost:5000/')
+                loader: () => fetch('https://b610-lerning-platform-server-side-ifazo.vercel.app/')
             },
             {
                 path: "/courses/:id",
                 element: <CardDetails></CardDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({ params }) => fetch(`https://b610-lerning-platform-server-side-ifazo.vercel.app/courses/${params.id}`)
             },
             {
                 path: "/login",
@@ -44,5 +44,5 @@ export const routes = createBrowserRouter([
                 element: <Blog></Blog>
             }
         ]
-    } 
+    }
 ]);
