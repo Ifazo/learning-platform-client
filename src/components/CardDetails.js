@@ -1,14 +1,16 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const CardDetails = () => {
+
+    const course = useLoaderData();
+    console.log(course);
     return (
         <div>
-            <div className='container-fluid'>
-                <div className='row content'>
-                    <div class="col-sm-3 sidenav">
-                        <h3>Card Details</h3>
-                    </div>
-                </div>
+            <div className='container-fluid w-75'>
+                <img src={course.logo} className='w-25' alt="" />
+                <h6>Couse Name: {course.name}</h6>
+                <p>Couse Details: {course.description}</p>
             </div>
         </div>
     );
