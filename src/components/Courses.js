@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 const Courses = () => {
 
     const topic = useLoaderData();
-    console.log(topic)
+    // console.log(topic);
     
     return (
         <div>
