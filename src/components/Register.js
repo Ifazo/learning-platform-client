@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
-import app from '../firebase/firebaseConfig'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/UserContext';
 
-const auth = getAuth(app);
+// const auth = getAuth(app);
 
 const Register = () => {
 
-    const [passwordError, setPasswordError] = useState('');
-    const [success, setSuccess] = useState(false);
+    const { createUser } = useContext(AuthContext);
+    console.log(createUser);
 
     const handleRegister = (event) => {
         event.preventDefault();
-        setSuccess(false);
 
 
         const form = event.target;
@@ -24,26 +22,16 @@ const Register = () => {
         const password = form.password.value;
         console.log(name, text, email, password);
 
-        createUserWithEmailAndPassword(auth, email, password)
+        createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setSuccess(true);
-                setPasswordError('');
                 form.reset();
             })
             .catch(error => {
                 console.error(error);
-                setPasswordError(error.message);
             })
         
-        signOut(auth)
-            .then(() => {
-                console.log('Sign-out successful');
-            })
-            .catch((error) => {
-                console.log(error);
-            })
     }
 
     return (
@@ -70,8 +58,6 @@ const Register = () => {
                     <Link to='/login'>Already have an account?</Link>
                 </Form.Group>
 
-                <p className='text-danger'>{passwordError}</p>
-                {success && <p className='text-success'>User Created Successfully.</p>}
                 <Button variant="primary" type="submit">
                     Register
                 </Button>

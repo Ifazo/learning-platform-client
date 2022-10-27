@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
 const Cards = (item) => {
-    console.log(item.item.id);
+    // console.log(item.item.id);
     
     return (
         <Card style={{ width: '18rem' }}>

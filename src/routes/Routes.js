@@ -14,6 +14,7 @@ export const routes = createBrowserRouter([
         {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Errorpage></Errorpage>,
         children: [
             {
                 path: "/",
@@ -41,10 +42,6 @@ export const routes = createBrowserRouter([
             {
                 path: "/blog",
                 element: <Blog></Blog>
-            },
-            {
-                path: "*",
-                element: <Errorpage></Errorpage>
             }
         ]
     } 

@@ -4,54 +4,52 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
-import app from '../firebase/firebaseConfig'
-import { useState } from 'react';
-const auth = getAuth(app);
+import UserContext, { AuthContext } from '../context/UserContext';
 
 const Header = () => {
+  const { user } = UserContext(AuthContext);
+  console.log(user);
+  // const [user, setUser] = useState({
 
-  const [user, setUser] = useState({
+  // })
 
-  })
-
-  const googleProvider = new GoogleAuthProvider();
-  const githubProvider = new GithubAuthProvider();
+  // const googleProvider = new GoogleAuthProvider();
+  // const githubProvider = new GithubAuthProvider();
 
 
-  const handleGoogleSignIn = () => {
-    signInWithPopup(auth, googleProvider)
-      .then(result => {
-        const user = result.user;
-        setUser(user);
-        // console.log(user);
-      })
-      .catch(error => {
-        // console.error(error);
-    })
-  }
+  // const handleGoogleSignIn = () => {
+  //   signInWithPopup(auth, googleProvider)
+  //     .then(result => {
+  //       const user = result.user;
+  //       setUser(user);
+  //       // console.log(user);
+  //     })
+  //     .catch(error => {
+  //       // console.error(error);
+  //   })
+  // }
 
-  const handleGithubSignIn = () => {
-    signInWithPopup(auth, githubProvider)
-      .then(result => {
-        const user = result.user;
-        setUser(user);
-        // console.log(user);
-      })
-      .catch(error => {
-        // console.error(error);
-      })
-  }
+  // const handleGithubSignIn = () => {
+  //   signInWithPopup(auth, githubProvider)
+  //     .then(result => {
+  //       const user = result.user;
+  //       setUser(user);
+  //       // console.log(user);
+  //     })
+  //     .catch(error => {
+  //       // console.error(error);
+  //     })
+  // }
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        setUser({});
-      })
-      .catch(() => {
-        setUser({})
-      })
-  }
+  // const handleSignOut = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       setUser({});
+  //     })
+  //     .catch(() => {
+  //       setUser({})
+  //     })
+  // }
 
     return (
         <div>
@@ -60,8 +58,8 @@ const Header = () => {
             
             <Navbar.Brand to="/">Tutorial Wiki</Navbar.Brand>
             <div className='d-flex'>
-              <p>User name: {user.displayName}</p>
-                <img className='rounded-circle' src={user.photoURL} alt="" />
+              {/* <p>User name: {user.displayName}</p> */}
+                {/* <img className='rounded-circle' src={user.photoURL} alt="" /> */}
             </div>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -74,13 +72,13 @@ const Header = () => {
                   <Link className='btn btn-primary' to="/register">Register</Link>
                   <Link className='btn btn-primary' to="/login">Sign-in</Link>
           
-                  {user.uid ?
+                  {/* {user.uid ?
                     <button className='btn btn-primary' onClick={handleSignOut}>Sign Out</button> :
                     <>
                       <button className='btn btn-primary' onClick={handleGoogleSignIn}>Google Sing In</button>
                       <button className='btn btn-primary' onClick={handleGithubSignIn}>Github Sign IN</button>
-                    </>
-                  }
+                    </>} */}
+      
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

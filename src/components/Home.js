@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../context/UserContext';
 import Cards from './Cards';
 
 const Home = () => {
+
+    const {user} = useContext(AuthContext);
+    // console.log(user);
 
     const data = useLoaderData();
     // console.log(data);
