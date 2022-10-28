@@ -15,8 +15,6 @@ const Header = () => {
       .then(console.log('User logged out!'))
       .catch(error => console.log(error))
   }
-
-    console.log(user);
     
     return (
         <div>
@@ -31,8 +29,10 @@ const Header = () => {
                 <Link className='btn btn-link mx-2' to="/courses">Courses</Link>
                 <Link className='btn btn-link mx-2' to="/blog">Blog</Link>
                 <div>
-                  {user.uid ? <><p>{user.displayName}</p>
-                  <img className='rounded-circle' src={user.photoURL} alt="" /></> : <></>}
+                  {
+                    user && <div><p>{user.displayName}</p>
+                      <img className='rounded-circle' src={user.photoURL} alt="" /></div>
+                  }
                 </div>
                 <div>
                   {

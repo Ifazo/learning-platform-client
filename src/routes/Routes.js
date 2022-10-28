@@ -9,7 +9,7 @@ import Home from '../components/Home';
 import Login from "../components/Login";
 import Register from '../components/Register';
 import Main from "../outlet/Main";
-import PrivateRoutes from './PrivateRoutes';
+// import PrivateRoutes from './PrivateRoutes';
 
 
 export const routes = createBrowserRouter([
@@ -30,12 +30,12 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "/courses/:id",
-                element: <PrivateRoutes><CardDetails></CardDetails></PrivateRoutes>,
+                element: <CardDetails></CardDetails>,
                 loader: ({ params }) => fetch(`https://b610-lerning-platform-server-side-ifazo.vercel.app/courses/${params.id}`)
             },
             {
                 path: "/courses/:id",
-                element: <PrivateRoutes><Checkout></Checkout></PrivateRoutes>,
+                element: <Checkout></Checkout>,
                 loader: ({ params }) => fetch(`https://b610-lerning-platform-server-side-ifazo.vercel.app/pay/${params.id}`)
             },
             {
