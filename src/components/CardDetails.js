@@ -1,21 +1,27 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useContext } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import ReactToPdf from 'react-to-pdf';
+import { AuthContext } from '../context/UserContext';
+import Login from './Login';
 
 const ref = React.createRef();
 
 const CardDetails = () => {
 
+    const {user} = useContext(AuthContext)
+
     const course = useLoaderData();
-    console.log(course);
+    // console.log(course);
     return (
         <div>
-            <div>
+            {user && user.email ? <div>
                 <ReactToPdf targetRef={ref} filename="details-print.pdf">
                     {({ toPdf }) => (
-                        <button onClick={toPdf}>Generate pdf</button>
+                        <button className='btn btn-outline-secondary' onClick={toPdf}>Generate pdf</button>
                     )}
                 </ReactToPdf>
+                <Link className='btn btn-primary' to={`/pay/${course.id}`}>Check Out</Link>
                 <div className='w-100 h-auto' ref={ref} >
                     <div className='container-fluid'>
                         <img src={course.logo} className='w-25' alt="" />
@@ -23,7 +29,8 @@ const CardDetails = () => {
                         <p>Couse Details: {course.description}</p>
                     </div>
                 </div>
-            </div>
+            </div> : <Login></Login>}
+            
         </div>
     );
 };

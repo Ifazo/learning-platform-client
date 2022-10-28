@@ -1,85 +1,44 @@
 import React from 'react';
+import { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import UserContext, { AuthContext } from '../context/UserContext';
+import { AuthContext } from '../context/UserContext';
 
 const Header = () => {
-  const { user } = UserContext(AuthContext);
-  console.log(user);
-  // const [user, setUser] = useState({
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user.displayName, user.email, user.photoURL);
 
-  // })
+  const handleLogout = () => {
+    logOut()
+      .then(console.log('User logged out!'))
+      .catch(error => console.log(error))
+  }
 
-  // const googleProvider = new GoogleAuthProvider();
-  // const githubProvider = new GithubAuthProvider();
-
-
-  // const handleGoogleSignIn = () => {
-  //   signInWithPopup(auth, googleProvider)
-  //     .then(result => {
-  //       const user = result.user;
-  //       setUser(user);
-  //       // console.log(user);
-  //     })
-  //     .catch(error => {
-  //       // console.error(error);
-  //   })
-  // }
-
-  // const handleGithubSignIn = () => {
-  //   signInWithPopup(auth, githubProvider)
-  //     .then(result => {
-  //       const user = result.user;
-  //       setUser(user);
-  //       // console.log(user);
-  //     })
-  //     .catch(error => {
-  //       // console.error(error);
-  //     })
-  // }
-
-  // const handleSignOut = () => {
-  //   signOut(auth)
-  //     .then(() => {
-  //       setUser({});
-  //     })
-  //     .catch(() => {
-  //       setUser({})
-  //     })
-  // }
-
+    console.log(user);
+    
     return (
         <div>
     <Navbar bg="light" expand="lg">
       <Container>
             
-            <Navbar.Brand to="/">Tutorial Wiki</Navbar.Brand>
-            <div className='d-flex'>
-              {/* <p>User name: {user.displayName}</p> */}
-                {/* <img className='rounded-circle' src={user.photoURL} alt="" /> */}
-            </div>
-
+       <Navbar.Brand to="/">Tutorial Wiki</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-                <Link className='btn btn-primary' to="/">Home</Link>
-                <Link className='btn btn-primary' to="/courses">Courses</Link>
-                <Link className='btn btn-primary' to="/blog">Blog</Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                  <Link className='btn btn-primary' to="/register">Register</Link>
-                  <Link className='btn btn-primary' to="/login">Sign-in</Link>
-          
-                  {/* {user.uid ?
-                    <button className='btn btn-primary' onClick={handleSignOut}>Sign Out</button> :
-                    <>
-                      <button className='btn btn-primary' onClick={handleGoogleSignIn}>Google Sing In</button>
-                      <button className='btn btn-primary' onClick={handleGithubSignIn}>Github Sign IN</button>
-                    </>} */}
-      
-            </NavDropdown>
+                <Link className='btn btn-link mx-2' to="/">Home</Link>
+                <Link className='btn btn-link mx-2' to="/courses">Courses</Link>
+                <Link className='btn btn-link mx-2' to="/blog">Blog</Link>
+                <div>
+                  {user.uid ? <><p>{user.displayName}</p>
+                  <img className='rounded-circle' src={user.photoURL} alt="" /></> : <></>}
+                </div>
+                <div>
+                  {
+                    user?.uid ? <Link className='btn btn-link mx-2' onClick={handleLogout}>Log Out</Link> : <Link className='btn btn-link mx-2' to="/login">Login</Link>
+                  }
+                </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

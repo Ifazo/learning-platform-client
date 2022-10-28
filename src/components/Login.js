@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { signInWithEmailAndPassword, getAuth, signOut } from 'firebase/auth';
-import app from '../firebase/firebaseConfig'
 import { Link } from 'react-router-dom';
-
-const auth = getAuth(app);
+import { useContext } from 'react';
+import { AuthContext } from '../context/UserContext';
 
 const Login = () => {
+
+  const { signIn, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
 
   const [passwordError, setPasswordError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -21,7 +21,7 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
 
-    signInWithEmailAndPassword(auth, email, password)
+    signIn()
       .then(result => {
         const user = result.user;
         console.log(user);
@@ -34,13 +34,28 @@ const Login = () => {
       setPasswordError(error.message);
     })
 
-    signOut(auth)
-      .then(() => {
-        console.log('Sign-out successful');
+  }
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then(result => {
+        // const user = result.user;
+        // setUser(user);
+        // console.log(user);
       })
-        .catch((error) => {
-          console.log(error);
-        })
+      .catch(error => {
+        // console.error(error);
+      })
+  }
+  const handleGithubSignIn = () => {
+    signInWithGithub()
+      .then(result => {
+        // const user = result.user;
+        // setUser(user);
+        // console.log(user);
+      })
+      .catch(error => {
+        // console.error(error);
+      })
   }
 
   return (
@@ -66,6 +81,8 @@ const Login = () => {
           Log In
         </Button>
       </Form>
+      <button className='btn btn-primary m-2' onClick={handleGoogleSignIn}>Google Sing In</button>
+      <button className='btn btn-primary m-2' onClick={handleGithubSignIn}>GitHub Sing In</button>
     </div>
   );
 };

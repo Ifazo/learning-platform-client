@@ -6,7 +6,6 @@ import Cards from './Cards';
 const Home = () => {
 
     const {user} = useContext(AuthContext);
-    // console.log(user);
 
     const data = useLoaderData();
     // console.log(data);

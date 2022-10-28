@@ -4,12 +4,11 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/UserContext';
 
-// const auth = getAuth(app);
-
 const Register = () => {
+    
+    const { createUser, updateUser } = useContext(AuthContext);
 
-    const { createUser } = useContext(AuthContext);
-    console.log(createUser);
+    // console.log(user);
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -20,18 +19,21 @@ const Register = () => {
         const text = form.text.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, text, email, password);
+        // console.log(name, text, email, password);
 
         createUser(email, password)
             .then(result => {
-                const user = result.user;
-                console.log(user);
-                form.reset();
+                // console.log(result.user);
+            updateUser(name, text)
+                .then(() => {
+                    // console.log(auth.currentUser);
+                    
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                });
             })
-            .catch(error => {
-                console.error(error);
-            })
-        
+            .catch(error => console.log(error))
     }
 
     return (
@@ -61,9 +63,11 @@ const Register = () => {
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
+
             </Form>
         </div>
     );
 };
+
 
 export default Register;

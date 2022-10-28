@@ -3,11 +3,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/Blog";
 import CardDetails from '../components/CardDetails';
 import Courses from "../components/Courses";
+import Checkout from "../components/Checkout";             
 import Errorpage from "../components/Errorpage";
 import Home from '../components/Home';
 import Login from "../components/Login";
 import Register from '../components/Register';
 import Main from "../outlet/Main";
+import PrivateRoutes from './PrivateRoutes';
 
 
 export const routes = createBrowserRouter([
@@ -28,8 +30,13 @@ export const routes = createBrowserRouter([
             },
             {
                 path: "/courses/:id",
-                element: <CardDetails></CardDetails>,
+                element: <PrivateRoutes><CardDetails></CardDetails></PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://b610-lerning-platform-server-side-ifazo.vercel.app/courses/${params.id}`)
+            },
+            {
+                path: "/courses/:id",
+                element: <PrivateRoutes><Checkout></Checkout></PrivateRoutes>,
+                loader: ({ params }) => fetch(`https://b610-lerning-platform-server-side-ifazo.vercel.app/pay/${params.id}`)
             },
             {
                 path: "/login",
